@@ -19,8 +19,7 @@ mongoose.connect(MONGO_URL).then(() => {
 // middleware
 app.use(express.json());
 
-// cors
-app.use(cors());
+app.use(cors({ origin: "https://profound-capybara-653152.netlify.app" }));
 // routes
 app.use("/api/v1", Authuser);
 app.use("/api/v1", Book);
