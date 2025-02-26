@@ -22,11 +22,11 @@ app.use(express.json());
 // cors
 app.use(cors());
 // routes
-app.use("/api/v1", Authuser);
-app.use("/api/v1", Book);
-app.use("/api/v1", favourite);
-app.use("/api/v1", cart);
-app.use("/api/v1", Order);
+app.use("api/v1", Authuser);
+app.use("api/v1", Book);
+app.use("api/v1", favourite);
+app.use("api/v1", cart);
+app.use("api/v1", Order);
 
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);
