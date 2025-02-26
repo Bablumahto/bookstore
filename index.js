@@ -18,7 +18,15 @@ mongoose.connect(MONGO_URL).then(() => {
 
 // middleware
 app.use(express.json());
-app.use(cors());
+
+// cors
+app.use(
+  cors({
+    origin: "https://subtle-malasada-e7de5d.netlify.app", // Replace with your frontend URL
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+  })
+);
 // routes
 app.use("/api/v1", Authuser);
 app.use("/api/v1", Book);
