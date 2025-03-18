@@ -8,25 +8,28 @@ router.post("/register", async (req, res) => {
   try {
     const { username, email, password, address } = req.body;
 
-    // check if user exist
+    // Check if user exists
     const existingEmail = await User.findOne({ email: email });
     if (existingEmail) {
-      return res.status(400).json({ mesaage: "email exist" });
+      return res.status(400).json({ message: "Email already exists" });
     }
 
-    // create user
-    const haspassword = await bcrypt.hash(password, 10);
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create user
     const newUser = new User({
-      username: username,
-      email: email,
-      password: haspassword,
-      address: address,
+      username,
+      email,
+      password: hashedPassword,
+      address,
     });
 
     await newUser.save();
-    return res.status(200).json({ mesaage: "register successsfully" });
+    return res.status(200).json({ message: "Registered successfully" });
   } catch (error) {
-    res.json({ mesaage: "inetrnal server error" });
+    console.error("Error in /register route:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
